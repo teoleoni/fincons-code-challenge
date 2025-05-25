@@ -1,0 +1,85 @@
+inputTables:
+    CONTRACT:
+        SCHEMA:
+            SOURCE_SYSTEM: STRING
+            CONTRACT_ID: INTEGER
+            CONTRACT_TYPE: STRING
+            INSURED_PERIOD_FROM: TIMESTAMP
+            INSURED_PERIOD_TO: DATE
+            CREATION_DATE: TIMESTAMP
+    CLAIM:
+        SCHEMA:
+            SOURCE_SYSTEM: STRING
+            CLAIM_ID: STRING
+            CONTRACT_SOURCE_SYSTEM: STRING
+            CONTRACT_ID: INTEGER
+            CLAIM_TYPE: STRING
+            DATE_OF_LOSS: DATE
+            AMOUNT: DECIMAL(16,5)
+            CREATION_DATE: TIMESTAMP
+
+outputTables:
+    TRANSACTIONS:
+        COLUMNS:
+            CONTRACT_SOURCE_SYSTEM
+            CONTRACT_SOURCE_SYSTEM_ID
+            SOURCE_SYSTEM_ID
+            TRANSACTION_TYPE
+            TRANSACTION_DIRECTION
+            CONFORMED_VALUE
+            BUSINESS_DATE
+            CREATION_DATE
+            SYSTEM_TIMESTAMP
+            NSE_ID
+        NULLABLE:
+            CONTRACT_SOURCE_SYSTEM: True
+            CONTRACT_SOURCE_SYSTEM_ID: True
+            SOURCE_SYSTEM_ID: True
+            TRANSACTION_TYPE: False
+            TRANSACTION_DIRECTION: True
+            CONFORMED_VALUE: True
+            BUSINESS_DATE: True
+            CREATION_DATE: True
+            SYSTEM_TIMESTAMP: True
+            NSE_ID: False
+
+PRIMARY_KEYS:
+    CONTRACT:
+        SOURCE_SYSTEM
+        CONTRACT_ID
+    CLAIM:
+        SOURCE_SYSTEM
+        CLAIM_ID
+        CONTRACT_SOURCE_SYSTEM
+        CONTRACT_ID
+    TRANSACTIONS:
+        CONTRACT_SOURCE_SYSTEM
+        CONTRACT_SOURCE_SYSTEM_ID
+        NSE_ID
+
+TIME_FORMAT:
+    CONTRACT:
+        INSURED_PERIOD_FROM: dd.MM.yyyy
+        INSURED_PERIOD_TO: dd.MM.yyyy
+        CREATION_DATE: dd.MM.yyyy HH:mm
+    CLAIM:
+        DATE_OF_LOSS: dd.MM.yyyy
+        CREATION_DATE: dd.MM.yyyy HH:mm
+    TRANSACTIONS:
+        BUSINESS_DATE: yyyy-MM-dd
+        CREATION_DATE: yyyy-MM-dd HH:mm:ss
+
+configurationCsv:
+    CONTRACT:
+        delimiter: ","
+        header: True
+    CLAIM:
+        delimiter: ","
+        header: True
+    TRANSACTIONS:
+        delimiter: ","
+        header: True
+
+mappingColumns:
+    CONTRAT_ID: CONTRACT_ID
+    INSUDRED_PERIOD_TO: INSURED_PERIOD_TO
