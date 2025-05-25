@@ -1,0 +1,3 @@
+pyspark
+PyYAML
+requests
